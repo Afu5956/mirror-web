@@ -103,15 +103,6 @@
 						<div id="wizard">
 						</div>
 					{% endunless %}
-						<div id="news" {%if site.issue%}class="col-md-3"{%endif%}>
-							<h4>{% fa_svg fas.fa-bullhorn %} 新闻公告 </h4>
-							<ul>
-								{% for news in site.categories.news limit: 3%}
-								<li><a href="/news/#{{news.slug}}"><strong>{{news.date | date: "%Y-%m-%d"}}</strong> {{news.title}}</a></li>
-								{% endfor %}
-							</ul>
-							<div class="text-right"><a href="/news/"> more {% fa_svg fas.fa-angle-double-right %} </a></div>
-						</div>
 						<div class="thuhidden {%if site.issue%}col-md-4{%endif%}">
 							<h4> {% fa_svg fas.fa-link %} 域名选择 </h4>
 							<ul>
@@ -133,25 +124,14 @@
 							</button>
 						</div>
 						{% endunless %}
-						<div class="thuhidden {%if site.issue%}col-md-3{%endif%}">
-							<h4> {% fa_svg far.fa-envelope %} 联系我们 </h4>
-							<ul>
-								<li><strong>意见反馈</strong> <br /> <a href="https://github.com/tuna/issues">https://github.com/tuna/issues</a></li>
-								<li><strong>发送邮件</strong> <br /> <a class="eib1gieB"></a></li>
-								<li><strong>在线交流</strong> <br /> <a href="https://web.libera.chat/#tuna"> #tuna at Libera.Chat </a></li>
-							</ul>
-						</div>
 						<div {%if site.issue%}class="col-md-2"{%endif%}>
 							<h4> {% fa_svg fas.fa-external-link-alt %} 相关链接 </h4>
 							<ul>
 								<li><a href="/help/">使用帮助</a></li>
 								{% unless site.issue %}
-								<li><a href="/status/#server-status">服务器状态</a></li>
 								<li><a href="/status/#syncing-status">同步状态</a></li>
 								{% endunless %}
-								<li class="thuhidden"><a href="https://tuna.moe/">清华大学 TUNA 协会</a></li>
-								<li><a href="https://github.com/tuna/tunasync">镜像管理器源码</a></li>
-								<li><a href="https://github.com/tuna/tunasync-scripts">自定义镜像脚本</a></li>
+								<li class="thuhidden"><a href="https://guide.xjtlu.edu.cn/">MITS GUIDE</a></li>
 							</ul>
 						</div>
 					{% unless site.issue %}
@@ -213,6 +193,3 @@
 	<script src="/static/js/browser-update.js?{{ site.data['hash'] }}"></script>
 	{% endunless %}
 </html>
-<!--
-	vim: ts=2 sts=2 sw=2 noexpandtab
--->

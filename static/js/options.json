@@ -1,1 +1,3 @@
-../njs/options.json
+---
+---
+{% include options.json %}
