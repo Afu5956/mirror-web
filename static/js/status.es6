@@ -10,32 +10,6 @@ $(document).ready(() => {
     }
     return size.toFixed(1) + ' ' + units[i];
   }
-
-  const diskUsage = new Vue({
-    el: "#disk-usage",
-    data: {
-      diskUsages: []
-    },
-    created () {
-      $.get("/static/status/disk.json", (d) => {
-        if(!Array.isArray(d)){
-          d = [d];
-        }
-        this.diskUsages = d.map((disk) => ({
-          desc: disk.desc,
-          used: readableFileSize(disk.used_kb * 1024),
-          total: readableFileSize(disk.total_kb * 1024),
-          percentage: 0,
-          _percentage: Math.round(disk.used_kb * 100 / disk.total_kb)
-        }));
-        setTimeout(()=>{
-          this.diskUsages.forEach((disk) => {
-            disk.percentage = disk._percentage;
-          });
-        }, 0);
-      });
-    }
-  });
   
   const SCROLL_INTERVAL = 2000;
 

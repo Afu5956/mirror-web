@@ -20,7 +20,7 @@ def getPlatformPriority(platform):
     platform = platform.lower()
     if platform in ['amd64', 'x86_64', '64bit']:
         return 100
-    elif platform in ['i386', 'i486', 'i586', 'i686', 'x86', '32bit']:
+    elif platform in ['i386', 'i686', 'x86', '32bit']:
         return 90
     else:
         return 0

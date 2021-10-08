@@ -1,23 +1,32 @@
 {% for footer-i in (1..2) %}
 {% unless page.legacy and footer-i == 1 %}
-<div id="footerwrap" class="tuna-foot-{{ footer-i }}"{% if page.legacy %} style="visibility: visible;"{% endif %}>
+<div id="footerwrap" class="mirrors-xjtlu-foot-{{ footer-i }}"{% if page.legacy %} style="visibility: visible;"{% endif %}>
   <div class="container">
     <div class="row">
-      <div class="col-lg-4 col-md-4{% if page.legacy %} col-xs-4{% endif %}">
-        <p class="thuhidden">本站由MITS运行维护。</p>
+      <div class="col-lg-5 col-md-5{% if page.legacy %} col-xs-5{% endif %}">
+        <!--p class="thuhidden">XJTLU MITS maintains this mirror station.</p-->
+				<p class="thuhidden">Open Source Mirror</p>
+				<H2>This site is only open to users on the SIP campus.</H2>
         {% if site.footnote %}
-        <p class="thuhidden">{{ site.footnote }}</p>
+        <!--p class="thuhidden">{{ site.footnote }}</p-->
         {% endif %}
       </div>
-      <div class="col-lg-4 col-md-4{% if page.legacy %} col-xs-4{% endif %}">
-        {% if site.sponsor %}
-        <h4>Sponsor</h4>
-        {% endif %}
-        <div class="img-responsive thuhidden">
-        </div>
-      </div>
-  </div>
-</div>
-</div>
+    </div><!--/row -->
+  </div><!--/container -->
+</div><!--/footerwrap -->
 {% endunless %}
 {% endfor %}
+
+<script>
+WebFont.load({
+  custom: {
+    families: ['Lato']
+  }
+});
+var lei3Po8h = ["support", ["mirrors", "xjtlu", "edu", "cn"].join(".")].join("@");
+$('a.eib1gieB')
+  .text(lei3Po8h)
+  .attr('href', ["ma","lto:"].join("i") + lei3Po8h);
+</script>
+
+{% fa_svg_generate %}

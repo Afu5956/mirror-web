@@ -13,7 +13,7 @@
 					{% if site.issue %}
 					<div class="col-{% if page.legacy %}xs{% else %}md{% endif %}-12 table-responsive">
 						<div class="alert text-center" id="cover-alert">
-							<h1>{{ site.school }}开源软件镜像站</h1>
+							<h1>{{ site.school }}Open Source Mirror</h1>
 							<h3>暂时无法提供服务</h3>
 							<div class="pull-right">
 								<img src="/static/img/candle.jpg"
@@ -33,9 +33,9 @@
 					{% else %}
 					<div class="col-{% if page.legacy %}xs{% else %}md{% endif %}-8 table-responsive" id="mirror-list">
 						<div class="row">
-							<h3 id="mirror-title">{% fa_svg fas.fa-cube %} 镜像列表 </h3>
+							<h3 id="mirror-title">{% fa_svg fas.fa-cube %} Mirror list </h3>
 							{% unless page.legacy %}
-							<input type="search" v-model.trim="filter" id="search" placeholder="搜索" autocomplete="off">
+							<input type="search" v-model.trim="filter" id="search" placeholder="Search" autocomplete="off">
 							{% endunless %}
 						</div>
 						<table class="table" v-if="mirrorList.length">
@@ -103,35 +103,37 @@
 						<div id="wizard">
 						</div>
 					{% endunless %}
-						<div class="thuhidden {%if site.issue%}col-md-4{%endif%}">
-							<h4> {% fa_svg fas.fa-link %} 域名选择 </h4>
+						<div id="news" {%if site.issue%}class="col-md-3"{%endif%}>
+							<h4>{% fa_svg fas.fa-bullhorn %} Mirror News </h4>
 							<ul>
-								<li><a href="{{ site.url }}">{{ site.url }}</a> 自动选择 </li>
-								{% if site.urlv6 %}
-									<li><a href="{{ site.urlv6 }}">{{ site.urlv6 }}</a> 只解析 IPv6</li>
-								{% endif %}
-								{% if site.urlv4 %}
-									<li><a href="{{ site.urlv4 }}">{{ site.urlv4 }}</a> 只解析 IPv4</li>
-								{% endif %}
+								{% for news in site.categories.news limit: 3%}
+								<li><a href="/news/#{{news.slug}}"><strong>{{news.date | date: "%Y-%m-%d"}}</strong> {{news.title}}</a></li>
+								{% endfor %}
+							</ul>
+							<div class="text-right"><a href="/news/"> more {% fa_svg fas.fa-angle-double-right %} </a></div>
+						</div>
+						<div class="thuhidden {%if site.issue%}col-md-4{%endif%}">
+							<h4> {% fa_svg fas.fa-link %} Domain List </h4>
+							<ul>
+								<li><a href="{{ site.url }}">{{ site.url }}</a> Autocomplete </li>
 							</ul>
 						</div>
 						{% unless page.legacy or site.hide_download or site.issue %}
 						<div id="download-link">
-							<h4>{% fa_svg far.fa-file-archive %} 下载链接 </h4>
-							<p>常用发行版 iso 和应用工具安装包直接下载</p>
+							<h4>{% fa_svg far.fa-file-archive %} Download Links </h4>
+							<p>Direct download of commonly used CentOS and Ubuntu release iso.</p>
 							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#isoModal">
-								获取下载链接
+								{% fa_svg fas.fa-link %} Link
 							</button>
 						</div>
 						{% endunless %}
 						<div {%if site.issue%}class="col-md-2"{%endif%}>
-							<h4> {% fa_svg fas.fa-external-link-alt %} 相关链接 </h4>
+							<h4> {% fa_svg fas.fa-external-link-alt %} Help and synchronisation status </h4>
 							<ul>
-								<li><a href="/help/">使用帮助</a></li>
+								<li><a href="/help/">Help</a></li>
 								{% unless site.issue %}
-								<li><a href="/status/#syncing-status">同步状态</a></li>
+								<li><a href="/status/#syncing-status">Synchronisation status</a></li>
 								{% endunless %}
-								<li class="thuhidden"><a href="https://guide.xjtlu.edu.cn/">MITS GUIDE</a></li>
 							</ul>
 						</div>
 					{% unless site.issue %}
@@ -152,15 +154,13 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
-		        <h4 class="modal-title" id="isoModalLabel">获取安装镜像</h4>
+		        <h4 class="modal-title" id="isoModalLabel">OS Images</h4>
 		      </div>
 		      <div class="modal-body">
 					<div class="row">
 						<div class="col-md-12">
 							<ul class="nav nav-tabs">
-								<li role="presentation" :class="[curCategory === 'os' ? 'active' : '']" @click="switchCategory('os')" v-show="showCategory('os')"><a href="#">操作系统</a></li>
-								<li role="presentation" :class="[curCategory === 'app' ? 'active' : '']" @click="switchCategory('app')" v-show="showCategory('app')"><a href="#">应用软件</a></li>
-								<li role="presentation" :class="[curCategory === 'font' ? 'active' : '']" @click="switchCategory('font')" v-show="showCategory('font')"><a href="#">字体</a></li>
+								<li role="presentation" :class="[curCategory === 'os' ? 'active' : '']" @click="switchCategory('os')" v-show="showCategory('os')"><a href="#">operating system</a></li>
 							</ul>
 						</div>
 						<div class="col-md-3">

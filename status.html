@@ -3,7 +3,7 @@ permalink: /status/
 ---
 <!DOCTYPE html>
 <html>
-{% capture metaDesc %}镜像站监控，各个镜像的同步状态{% endcapture %}
+{% capture metaDesc %}Synchronisation status of each mirror{% endcapture %}
 	{% include head.html metaDesc=metaDesc notArticle=true %}
 <body>
 	{% include nav.html %}
@@ -11,7 +11,7 @@ permalink: /status/
 	{% unless site.issue %}
 		<div class="spacing hidden-xs"></div>
 		<div class="container">
-			<h3 id="syncing-status"># 同步状态</h3>
+			<h3 id="syncing-status"># Synchronisation status</h3>
 			<table class="table table-condensed flat-md">
 				<thead class="hidden-xs hidden-sm">
 					<tr>
@@ -123,3 +123,6 @@ permalink: /status/
 	<script src="/static/js/index.js?{{ site.data['hash'] }}"></script>
 </body>
 </html>
+<!--
+vim: ts=2 sts=2 sw=2 noexpandtab
+-->
