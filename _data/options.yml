@@ -14,10 +14,6 @@ mirror_desc:
     desc: 用于科学计算的 Python 发行版
   - name: apache
     desc: Apache 基金会赞助的各个项目
-  - name: binutils-gdb.git
-    desc: Binutils 和 GDB 等开发工具的源码 Git 仓库
-  - name: bioconductor
-    desc: 开源的基因数据分析处理工具
   - name: centos
     desc: CentOS official package repository.
   - name: elpa
@@ -83,7 +79,6 @@ unlisted_mirrors:
     url: '/github-release/googlefonts/'
 
 force_redirect_help_mirrors:
-  - AOSP
   - homebrew
   - binutils-gdb.git
 
