@@ -4,7 +4,7 @@
 
 This site uses Jekyll transformation, compiled into ECMAScript6 with babel, so you must install ruby >= 2.0 and NodeJS.
 
-### For Centos
+### For Centos 7
 1.install nodejs
 ```
 yum install nodejs
