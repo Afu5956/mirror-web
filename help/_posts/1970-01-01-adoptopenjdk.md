@@ -1,62 +1,63 @@
 ---
-category: help
 layout: help
 mirrorid: AdoptOpenJDK
+category: help
 ---
 
-## AdoptOpenJDK 镜像使用帮助
+# AdoptOpenJDK mirror guide
 
-### Windows/macOS 用户
+### Windows/macOS
 
-打开[下载页面](https://{{ site.hostname }}/AdoptOpenJDK/)，选择所需的版本，下载独立安装包。
+Open [download page](https://{{ site.hostname }}/AdoptOpenJDK/) Choose your version and download the package.
 
-### Debian/Ubuntu 用户
+### Ubuntu
 
-首先信任 GPG 公钥:
+Import gpg key
 
 ```
-wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+wget -qO - https://{{ site.hostname }}/AdoptOpenJDK/AdoptOpenJDK-gpg-public | sudo apt-key add -
 ```
 
-再选择你的 Debian/Ubuntu 版本，文本框中内容写进 `/etc/apt/sources.list.d/AdoptOpenJDK.list`
+Choose your Ubuntu version, and write the text content to `/etc/apt/sources.list.d/AdoptOpenJDK.list`.
 
 <form class="form-inline">
 <div class="form-group">
-	<label>你的 Debian/Ubuntu 版本: </label>
-	<select class="form-control release-select" data-template="#apt-template" data-target="#apt-content">
-		<option data-os="debian" data-release="jessie">Debian 8 (Jessie)</option>
-		<option data-os="debian" data-release="stretch">Debian 9 (Stretch)</option>
-		<option data-os="debian" data-release="buster">Debian 10 (Buster)</option>
-		<option data-os="debian" data-release="bullseye" selected>Debian 11 (Bullseye)</option>
-		<option data-os="ubuntu" data-release="xenial">Ubuntu 16.04 LTS</option>
-		<option data-os="ubuntu" data-release="bionic">Ubuntu 18.04 LTS</option>	
-		<option data-os="ubuntu" data-release="focal">Ubuntu 20.04 LTS</option>
-	</select>
+	<label>Choose your Ubuntu version: </label>
+		<label>
+    <select class="form-control" v-model="debrelease">
+    <option value="bionic" selected>Ubuntu 18.04 LTS</option>
+    <option value="focal">Ubuntu 20.04 LTS</option>
+    </select>
+		</label>
 </div>
 </form>
 
+{% raw %}
 <p></p>
 <pre>
-<code id="apt-content">
-</code>
+<code id="deb-bionic-content">deb https://{% endraw %}{{ site.hostname }}{% raw %}/AdoptOpenJDK/deb{% endraw %} {% raw %}{{debrelease}} main</code>
 </pre>
+{% endraw %}
 
-
-再执行
-
-```
-sudo apt-get update
-```
+Or copy the content, paste it in Terminal and press Enter to confirm.
 
 {% raw %}
-<script id="apt-template" type="x-tmpl-markup">
-deb {{if os_name|equals>ubuntu}}https{{else}}http{{/if}}://{%endraw%}{{ site.hostname }}{%raw%}/AdoptOpenJDK/deb {{release_name}} main
-</script>
-{%endraw%}
+<p></p>
+<pre>
+<code class="language-bash" id="deb-focal-content">cat >>/home/AdoptOpenJDK.list<< EOF
+deb https://{%endraw%}{{ site.hostname }}{%raw%}/AdoptOpenJDK/deb {{ debrelease }} main
+EOF</code>
+</pre>
+{% endraw %}
 
-### CentOS/RHEL
+Execute the `apt` command
+```shell
+sudo apt update
+```
 
-新建 `/etc/yum.repos.d/AdoptOpenJDK.repo`，内容为
+### CentOS
+
+Write the text content to `/etc/yum.repos.d/AdoptOpenJDK.repo`.
 
 ```
 [AdoptOpenJDK]
@@ -64,11 +65,51 @@ name=AdoptOpenJDK
 baseurl=https://{{ site.hostname }}/AdoptOpenJDK/rpm/centos$releasever-$basearch/
 enabled=1
 gpgcheck=1
-gpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public
+gpgkey=https://{{ site.hostname }}/AdoptOpenJDK/AdoptOpenJDK-gpg-public
 ```
 
-再执行
+Or copy the content, paste it in Terminal and press Enter to confirm.
+```shell
+cat >>/etc/yum.repos.d/AdoptOpenJDK.repo<< EOF
+[AdoptOpenJDK]
+name=AdoptOpenJDK
+baseurl=https://{{ site.hostname }}/AdoptOpenJDK/rpm/centos$releasever-$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=https://{{ site.hostname }}/AdoptOpenJDK/AdoptOpenJDK-gpg-public
+EOF
+```
 
-```
-sudo yum makecache
-```
+<form class="form-inline">
+<div class="form-group">
+	<label> Execute the </label>
+	<label>
+		<select class="form-control" v-model="yum_dnf">
+    <option value="yum" selected>Centos 7</option>
+    <option value="dnf">CentOS 8</option>
+    </select>
+	</label>
+	<label> command </label>
+</div>
+</form>
+
+{% raw %}
+<p></p>
+<pre>
+<code class="language-bash" id="yum-dnf-content">{{ yum_dnf }} makecache</code>
+</pre>
+{% endraw %}
+
+{% raw %}
+<script>
+ let vue = new Vue({
+		 el: "#help-content",
+		 data: {
+				 debrelease: 'bionic',
+				 yum_dnf: 'yum',
+		 },
+		 computed: {
+		 }
+ });
+</script>
+{% endraw %}
