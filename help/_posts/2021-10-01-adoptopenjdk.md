@@ -1,4 +1,4 @@
-﻿---
+---
 layout: help
 mirrorid: AdoptOpenJDK
 category: help
